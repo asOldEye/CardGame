@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA99A3B3-F391-4CD4-9F53-DB9A054D124A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Server</RootNamespace>
+    <AssemblyName>Server</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seance.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AuxiliaryLibrary\AuxiliaryLibrary.csproj">
+      <Project>{f1e298d3-a253-48f3-a2ea-5a8ef07dbb35}</Project>
+      <Name>AuxiliaryLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CardEnviopmentShared\CardEnvironmentShared.csproj">
+      <Project>{8E891F03-FF9A-4570-A007-176CF8B403A9}</Project>
+      <Name>CardEnvironmentShared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CardEnvironment\CardEnvironmentServer.csproj">
+      <Project>{4c80ab28-601b-4003-9cf5-3ae666ec1dbc}</Project>
+      <Name>CardEnvironmentServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CardSessionShared\CardSessionShared.csproj">
+      <Project>{A64976D1-F01E-440E-BA4D-FF9A6A3D18C1}</Project>
+      <Name>CardSessionShared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CardSession\CardSessionServer.csproj">
+      <Project>{ed28cc88-88a4-442d-9452-b6ee08bb4c11}</Project>
+      <Name>CardSessionServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConnectionProtocol\ConnectionProtocol.csproj">
+      <Project>{bdb0caf0-7180-4416-a1b5-2200b598c5de}</Project>
+      <Name>ConnectionProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleDatabase\SimpleDatabase.csproj">
+      <Project>{5d446a9a-24bc-487f-828c-c084e3f88bd1}</Project>
+      <Name>SimpleDatabase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
