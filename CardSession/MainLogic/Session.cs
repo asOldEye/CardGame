@@ -87,6 +87,8 @@ namespace CardSessionServer
                 if (attr == null) throw new ArgumentException("Method is'nt controller command");
                 if ((attr as ControllerCommand).OnMyTurn != (HisTurn == sender)) throw new ArgumentException("Turn error, not your turn");
                 method.Invoke(component, param);
+                OnSessionChanged.Invoke(this, new SessionChange(sender.ControllerInfo.Name + " has his turn"));
+                Controllers.Find(q => q.Obj1 == sender.ControllerInfo).SetObj2(TurnStatus.completed);
                 return;
             }
         }
@@ -105,16 +107,12 @@ namespace CardSessionServer
         /// Получает объект по его ID в сессии
         /// </summary>
         public Container GetObject(int id)
-        {
-            return SessionObjects.Find(f => f.ID == id);
-        }
+        { return SessionObjects.Find(f => f.ID == id); }
         /// <summary>
         /// Получает объекты определенного типа
         /// </summary>
         public List<Container> GetObjects<T>()
-        {
-            return SessionObjects.FindAll(f => f.GetType() == typeof(T));
-        }
+        { return SessionObjects.FindAll(f => f.GetType() == typeof(T)); }
         /// <summary>
         /// Удаляет объект из сессии
         /// </summary>
@@ -200,14 +198,13 @@ namespace CardSessionServer
             }
         }
 
-        //todo
         public async void TurnExpect()
         {
-            Turn++;
-            foreach (var f in Controllers) f.SetObj2(TurnStatus.expected);
-
+            int turn = Turn++;
             await Task.Delay(TimePerTurn);
-
+            if (turn++ == Turn)
+                foreach (var f in Controllers) f.SetObj2(TurnStatus.expected);
+            TurnExpect();
         }
     }
 }
